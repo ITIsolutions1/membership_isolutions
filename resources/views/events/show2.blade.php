@@ -34,21 +34,13 @@
             <div class="col-md-7">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <h5 class="font-weight-bold text-primary">{{ $event->nama }}</h5>  
-                        <div>
-                            @if(Auth::check() == true)
-                                <a href="{{ route('events.register', $event->id) }}" class="btn btn-outline-primary btn w-100 mt-3">Daftar Event</a>
-                            @else
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-                                    Daftar Event
-                                </button>
-                            @endif                            
-                        </div> 
-                        
-                    </div>                    
-                    <hr>            
+                        <h5 class="font-weight-bold text-primary">{{ $event->nama }}</h5>
+
+
+                    </div>
+                    <hr>
                     <p><strong>Deskripsi:</strong></p>
-                    {!! $event->deskripsi !!}                    
+                    {!! $event->deskripsi !!}
                 </div>
             </div>
         </div>
@@ -57,15 +49,15 @@
     <div class="row">
         <div class="card shadow-lg border-0 rounded-lg col mx-3 p-0">
             <div class="card-header bg-secondary text-white d-flex align-items-center">
-                <strong>Detail Informasi</strong>                
+                <strong>Detail Informasi</strong>
             </div>
-            <div class="card-body">               
-                    
+            <div class="card-body">
+
 
                     <div class="table-responsive">
                         <table class="table table-borderless table-sm mb-0">
                             <tbody>
-                                
+
                                 <tr>
                                     <td class="align-top text-muted"><i class="fas fa-user-tie"></i></td>
                                     <td class="align-top text-muted">Narasumber</td>
@@ -98,8 +90,16 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>            
-
+                    </div>
+                    <div class="tombol d-flex " style="width: 100%">
+                        @if(Auth::check() == true)
+                            <a href="{{ route('events.register', $event->id) }}" class="btn btn-outline-primary btn w-100 mt-3">Daftar Event</a>
+                        @else
+                            <button  type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#loginModal">
+                                Daftar Event
+                            </button>
+                        @endif
+                    </div>
                     <div id="tombol" class="tombol">
                         @if($event->link)
                         <a href="{{ $event->link }}" target="_blank" class="btn btn-outline-primary btn-block mt-3">
@@ -107,6 +107,7 @@
                         </a>
                         @endif
                     </div>
+
             </div>
         </div>
 
@@ -139,8 +140,8 @@
                         <label class="form-label" for="email">Email</label>
                         <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" type="email" id="email" name="email">
                         @error('email')
-                            <span class="text-danger">{{ $message }}</span>                                    
-                        @enderror                       
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -161,7 +162,7 @@
         </div>
     </div>
 
-  
+
 
 
     <script>

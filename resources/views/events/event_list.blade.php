@@ -37,7 +37,7 @@
                     <option value="training development" {{ request('category') == 'training development' ? 'selected' : '' }}>Training Development</option>
                 </select>
                 <input type="text" name="search" class="form-control mr-2" placeholder="Cari nama event" value="{{ request('search') }}">
-                
+
                 <select name="per_page" class="form-control mr-2" onchange="this.form.submit()">
                     <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                     <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
@@ -46,7 +46,7 @@
                 </select>
 
                 <button type="submit" class="btn btn-primary">Terapkan</button>
-            </form>            
+            </form>
         </div>
         <a href="{{ route('events.create') }}" class="btn btn-success shadow-sm">
             <i class="fas fa-plus-circle mr-1"></i> Add New Event
@@ -111,11 +111,11 @@
 
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="{{ route('events.delete', $event->id) }}" onclick=" return confirm('Apakah Anda Yakin Mau Menghapus Event Ini ? ')">Delete</a>
-                                        <a class="dropdown-item" href="{{ route('events.edit', $event->id) }}">Edit</a>                                                                          
-                                        <a class="dropdown-item" id="kirim_notifikasi" href="{{ route('emails.notification', $event->id) }}">Send Email Notification</a>
-                                        <a class="dropdown-item" id="broadcast" href="{{ route('broadcast.email', $event->id) }}">Broadcast Email</a> 
+                                        <a class="dropdown-item" href="{{ route('events.edit', $event->id) }}">Edit</a>
+                                        <a class="dropdown-item" id="kirim_notifikasi" href="{{ route('emails.notification', $event->id) }}">Send Notification to Participant</a>
+                                        <a class="dropdown-item" id="broadcast" href="{{ route('broadcast.email', $event->id) }}">Broadcast Email</a>
                                     </div>
-                                </div>   
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -145,7 +145,7 @@
                 <h5 class="mb-0">Mengirim notifikasi email...</h5>
             </div>
         </div>
-    </div>    
+    </div>
 
 @endsection
 

@@ -65,9 +65,9 @@ return [
     |
     */
 
-    
+
     // 'logo' => '<img src="vendor/adminlte/dist/img/isolutions.png" alt="Logo" style="max-width: 150px; height: auto; border-radius: 0;">',
-    // 'logo' => `<img src= "{{ asset('images/isolutions.png') }}" alt="Logo" style="max-width: 150px; height: auto;">`,    
+    // 'logo' => `<img src= "{{ asset('images/isolutions.png') }}" alt="Logo" style="max-width: 150px; height: auto;">`,
     'logo' => '<b style="color: #b71c1c;">Membership</b><span style="color: #b71c1c;"></span>',
     'logo_img' => 'vendor/adminlte/dist/img/isol.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
@@ -334,7 +334,7 @@ return [
             'text' => 'Dashboard',
             'url' => '/',
             'icon' => 'fas fa-house-user',
-            'can' => ''  
+            'can' => ''
         ],
         [
             'text'    => 'Account Settings',
@@ -346,7 +346,7 @@ return [
                     'url'  => '/profile',
                     'icon' => 'fas fa-fw fa-user',
                     'can' => ''
-                    
+
                 ],
                 // [
                 //     'text' => 'Change Password',
@@ -356,7 +356,7 @@ return [
                 // ],
 
             ],
-        ],        
+        ],
         [
             'text'    => 'Event',
             'icon'    => 'fas fa-fw fa-calendar-day',
@@ -366,17 +366,17 @@ return [
                     'text' => 'Event List',
                     'url' => '/events',
                     'icon' => 'far fa-fw fa-calendar',
-                    'can' => ''                    
+                    'can' => ''
                 ],
                 [
-                    'text' => 'Create Event',
+                    'text' => 'Manage Event',
                     'url' => '/events_admin',
                     'icon' => 'far fa-fw fa-calendar',
-                    'can' => 'admin-koordinator'                    
+                    'can' => 'admin-koordinator'
                 ],
-                
+
             ],
-        ],    
+        ],
         [
             'text'    => 'Member',
             'icon'    => 'fas fa-fw fa-users-cog',
@@ -395,8 +395,8 @@ return [
                 //     'can' => 'admin-only'
                 // ]
              ]
-            
-        ],   
+
+        ],
         [
             'text'    => 'Email',
             'icon'    => 'fas fa-envelope',
@@ -405,13 +405,13 @@ return [
                 [
                     'text' => 'Broadcast Email',
                     'url' => '/mail',
-                    'icon' => 'far fa-envelope',                    
+                    'icon' => 'far fa-envelope',
                     'can' => 'admin-koordinator'
                 ],
                 [
                     'text' => 'CRM Contacts (under develop)',
                     'url' => '/crm',
-                    'icon' => 'far fa-envelope',                    
+                    'icon' => 'far fa-envelope',
                     'can' => 'admin-koordinator'
                 ],
                 // [
@@ -421,8 +421,8 @@ return [
                 //     'can' => 'admin-only'
                 // ]
              ]
-            
-        ],          
+
+        ],
 
         // [
         //     'text' => 'multilevel',

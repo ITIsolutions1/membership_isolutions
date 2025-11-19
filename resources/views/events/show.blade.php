@@ -37,14 +37,14 @@
             <div class="col-md-7">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <h5 class="font-weight-bold text-primary">{{ $event->nama }}</h5>   
+                        <h5 class="font-weight-bold text-primary">{{ $event->nama }}</h5>
                         <div>
                             <button class="btn btn-success"  onclick="copyEventLink('{{ route('events.show2', $event->id) }}')" >Share Event Link</button>
-                        </div>                     
-                    </div>                    
-                    <hr>            
+                        </div>
+                    </div>
+                    <hr>
                     <p><strong>Deskripsi:</strong></p>
-                    {!! $event->deskripsi !!}                    
+                    {!! $event->deskripsi !!}
                 </div>
             </div>
         </div>
@@ -53,16 +53,16 @@
     <div class="row">
         <div class="card shadow-lg border-0 rounded-lg {{ Auth::user()->role == 'admin' ? 'col-5' : 'col' }} mx-3 p-0">
             <div class="card-header bg-secondary text-white d-flex align-items-center">
-                <strong>Detail Informasi</strong>                
+                <strong>Detail Informasi</strong>
             </div>
-            <div class="card-body">               
+            <div class="card-body">
                     {{-- <div>
                         <p class="text-muted mb-2"><i class="fas fa-user-tie"></i> Oleh: <strong>{{ $event->createdBy }}</strong></p>
                         <p class="text-muted mb-2"><i class="fas fa-user-tie"></i> Narasumber: <strong>{{ $event->narasumber }}</strong></p>
                         <p class="text-muted mb-2"><i class="fas fa-map-marker-alt"></i> Lokasi: <strong>{{ $event->Lokasi }}</strong></p>
                         <p class="text-muted mb-2"><i class="fas fa-calendar-alt"></i> Tanggal: <strong>{{ \Carbon\Carbon::parse($event->tanggal)->format('d M Y') }}</strong></p>
                         <p class="text-muted mb-2"><i class="fas fa-clock"></i> Jam: <strong>{{ $event->waktu}}</strong></p>
-                        <p class="text-muted mb-3"><i class="fas fa-file"></i> Jenis Acara: <strong>{{ $event->jenis_peminatan}}</strong></p>                                                                    
+                        <p class="text-muted mb-3"><i class="fas fa-file"></i> Jenis Acara: <strong>{{ $event->jenis_peminatan}}</strong></p>
                     </div> --}}
 
                     <div class="table-responsive">
@@ -107,12 +107,12 @@
                         </table>
                     </div>
 
-                    
+
                     <div id="status_pendaftaran" class="status_pendaftaran">
                         @if($terdaftar == true)
                             <h3><span class="badge badge-success">Anda Telah Terdaftar</span></h3>
                             <a class="btn btn-outline-danger" href="{{ route('events.register.batalkan', $event->id) }}">Batalkan Pendaftaran</a>
-                        @endif                        
+                        @endif
                     </div>
 
                     <div id="tombol" class="tombol">
@@ -123,12 +123,12 @@
                         @endif
 
                         <div>
-                            <a href="{{ route('events.register', $event->id) }}" class="btn btn-outline-primary btn w-100 mt-3">Daftar Event</a>                       
+                            <a href="{{ route('events.register', $event->id) }}" class="btn btn-outline-primary btn w-100 mt-3">Daftar Event</a>
                         </div>
 
                         @if(Auth::user()->role == 'admin')
                             <div>
-                                <a href="{{ route('events.edit', $event->id) }}" class="btn btn-outline-danger btn w-100 mt-3">Edit</a>                       
+                                <a href="{{ route('events.edit', $event->id) }}" class="btn btn-outline-danger btn w-100 mt-3">Edit</a>
                             </div>
                         @endif
                     </div>
@@ -138,7 +138,7 @@
         <div class="card shadow-lg border-0 rounded-lg col p-0">
             <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
                 <strong>Daftar Peserta</strong>
-                <strong>Jumlah Peserta : {{ $peserta->count() }}</strong>            
+                <strong>Jumlah Peserta : {{ $peserta->count() }}</strong>
             </div>
             <div class="card-body">
                 <div>
@@ -148,6 +148,7 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Email</th>
+                                <th>Nomor</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -156,10 +157,11 @@
                                 <td>{{ $index+1 }}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->email }}</td>
+                                <td>{{ $item->nomor }}</td>
                             </tr>
                             @endforeach
                         </tbody>
-                        
+
                     </table>
                 </div>
             </div>

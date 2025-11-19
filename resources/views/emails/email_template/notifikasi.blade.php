@@ -7,7 +7,7 @@
 </head>
 <body style="font-family: Arial, sans-serif; background-color: #f9fafb; padding: 20px;">
     <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
-        
+
         <!-- Header -->
         <div style="background-color: #1d4ed8; color: white; padding: 20px; border-top-left-radius: 8px; border-top-right-radius: 8px;">
             <h2 style="margin: 0;">📢 Info Acara Terbaru</h2>
@@ -25,28 +25,28 @@
                 </tr>
 
                 @if(!empty($event->lokasi))
-                <tr>
+                <tr style="background-color: #f3f4f6;">
                     <td style="padding: 8px; font-weight: bold;">Lokasi</td>
                     <td style="padding: 8px;">: {{ $event->lokasi }}</td>
                 </tr>
                 @endif
 
                 @if(!empty($event->tanggal))
-                <tr style="background-color: #f3f4f6;">
+                <tr>
                     <td style="padding: 8px; font-weight: bold;">Tanggal</td>
                     <td style="padding: 8px;">: {{ \Carbon\Carbon::parse($event->tanggal)->format('d M Y') }}</td>
                 </tr>
                 @endif
 
                 @if(!empty($event->waktu))
-                <tr>
+                <tr style="background-color: #f3f4f6;">
                     <td style="padding: 8px; font-weight: bold;">Waktu</td>
                     <td style="padding: 8px;">: {{ $event->waktu }}</td>
                 </tr>
                 @endif
 
                 @if(!empty($event->jenis_peminatan))
-                <tr style="background-color: #f3f4f6;">
+                <tr>
                     <td style="padding: 8px; font-weight: bold;">Jenis Acara</td>
                     <td style="padding: 8px;">: {{ ucfirst($event->jenis_peminatan) }}</td>
                 </tr>
@@ -54,7 +54,13 @@
                 @if($event->jenis_peminatan == 'seminar')
                 <tr style="background-color: #f3f4f6;">
                     <td class="align-top" style="padding: 8px; font-weight: bold;">Narasumber</td>
-                    <td class="align-top" style="padding: 8px;">: {{ $event->narasumber }}</td>                    
+                    <td class="align-top" style="padding: 8px;">: {{ $event->narasumber }}</td>
+                </tr>
+                @endif
+                @if($event->link)
+                <tr>
+                    <td class="align-top" style="padding: 8px; font-weight: bold;">Link</td>
+                    <td class="align-top" style="padding: 8px;">: {{ $event->link }}</td>
                 </tr>
                 @endif
             </table>
