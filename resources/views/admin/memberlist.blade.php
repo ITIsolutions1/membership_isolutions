@@ -87,6 +87,19 @@
                 <th scope="col">No</th>
                 {{-- <th scope="col">Nama</th> --}}
                 {{-- <th> --}}
+               <th scope="col">
+                    <span>Nomor Member</span>
+                    <a href="{{ request()->fullUrlWithQuery(['sort' => 'user_id', 'direction' => 'asc', 'page' => 1]) }}"
+                        style="text-decoration: none; {{ $currentSort == 'user_id' && $currentDirection == 'asc' ? 'font-weight: bold;' : '' }}">
+                        &#9650;
+                    </a>
+                    <a href="{{ request()->fullUrlWithQuery(['sort' => 'user_id', 'direction' => 'desc', 'page' => 1]) }}"
+                        style="text-decoration: none; {{ $currentSort == 'user_id' && $currentDirection == 'desc' ? 'font-weight: bold;' : '' }}">
+                        &#9660;
+                    </a>
+                </th>
+
+
                 <th>
                     <span>Nama</span>
                     <span>
@@ -141,6 +154,10 @@
                 @foreach ($member as $index => $item)
                     <tr>                
                         <td style="vertical-align: middle">{{ ($member instanceof \Illuminate\Pagination\LengthAwarePaginator ? $member->firstItem() + $index : $loop->iteration) }}</td>
+                        <td style="vertical-align: middle">
+                            {{ str_pad($item->user->id, 6, '0', STR_PAD_LEFT) }}
+                        </td>
+
                         <td style="vertical-align: middle">{{ $item->nama }}</td>
                         <td style="vertical-align: middle">{{ $item->domisili }}</td>
                         <td style="vertical-align: middle">{{ $item->user->email }}</td>
