@@ -146,6 +146,16 @@
                     </a>
                 </th>
 
+                 <th>
+                    <span>Sponsor</span>
+                    <a href="{{ request()->fullUrlWithQuery(['sort' => 'sponsor', 'direction' => 'asc', 'page' => 1]) }}">
+                        &#9650;
+                    </a>
+                    <a href="{{ request()->fullUrlWithQuery(['sort' => 'sponsor', 'direction' => 'desc', 'page' => 1]) }}">
+                        &#9660;
+                    </a>
+                </th>
+
                 <th scope="col">Peminatan</th>
                 <th scope="col">Action</th>
                 </tr>
@@ -162,6 +172,8 @@
                         <td style="vertical-align: middle">{{ $item->domisili }}</td>
                         <td style="vertical-align: middle">{{ $item->user->email }}</td>
                         <td style="vertical-align: middle">{{ \Illuminate\Support\Str::title($item->level) }}</td>
+                        <td style="vertical-align: middle">{{ $item->sponsor }}</td>
+                        
                        <td class="d-flex flex-column">
                             @foreach ($item->peminatan as $p)
                                 <span class="badge badge-info mb-1">{{ $p->peminatan }}</span>

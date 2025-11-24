@@ -78,6 +78,11 @@
                 </div>
             </div>
 
+             <div class="col-md-6">
+                    <label for="sponsor" class="profile-form-label">Sponsor</label>
+                    <input type="sponsor" class="form-control" id="sponsor" name="sponsor" value="{{ old('sponsor', $anggota->sponsor) }}">
+            </div>
+
             <hr>
             <div class="col-md-12">
                 <label for="about_me" class="profile-form-label">About Me</label>                

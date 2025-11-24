@@ -9,7 +9,7 @@
 @section('content')
     <div class="container">
     <h2>Edit Member</h2>
-    <form action="{{ route('member.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('member.update') }}" method="POST" cenctype="multipart/form-data">
         @csrf
         @method('POST')
 
@@ -34,6 +34,10 @@
             <div class="form-group col-md-6">
                 <label>Nama Lengkap</label>
                 <input type="text" name="nama_anggota" class="form-control" value="{{ old('nama_anggota', $anggota->nama) }}" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Sponsor</label>
+                <input type="text" name="sponsor" class="form-control" value="{{ old('sponsor', $anggota->sponsor) }}">
             </div>
             <div class="form-group col-md-6">
                 <label>Domisili</label>

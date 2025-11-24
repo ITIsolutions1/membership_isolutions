@@ -163,6 +163,7 @@ class AnggotaController extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'email' => $request->email,
                 'nomor' => $request->nomor,
+                'sponsor' => $request->sponsor,
                 'genre' => $request->genre,
                 'domisili' => $request->domisili,   
             ]);
@@ -341,8 +342,9 @@ class AnggotaController extends Controller
                 'nama' => $request->name,
                 'about_me' => $request->about_me,
                 'tanggal_lahir' => $request->tanggal_lahir,
-                'email' => $request->email,
+                'email' => $request->email, 
                 'nomor' => $request->nomor,
+                'sponsor' => $request->sponsor,
                 'genre' => $request->genre,
                 'level' => $request->role == 'admin' ? 'super admin' : $request->role,
                 'akses_level' => $request->role == 'admin' ? 'super admin' : $request->role,
