@@ -69,9 +69,23 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/events/registered/active', [EventsController::class, 'eventAktif'])->name('events.registered.aktif');
 
+    // route referral
+    // Tampilan referral form setelah login
+    Route::get('/events/{id_event}/referral-check', [EventsController::class, 'referralCheck'])
+        ->name('events.referral.check');
+
+    Route::get('/events/{event}/referral-skip', [EventsController::class, 'referralSkip'])
+    ->name('events.referral.skip');
+
+    Route::get('/events/{event}/already-joined', [EventController::class, 'alreadyJoined'])
+    ->name('events.already.joined');
+
+    Route::post('/events/{id_event}/referral-submit', [EventsController::class, 'referralSubmit'])
+        ->name('events.referral.submit');
 
     //event register
     Route::get('/events/register/{id_event}', [EventsController::class, 'register'])->name('events.register');
+
     Route::get('/events/register/batalkan/{id_event}', [EventsController::class, 'batalkan'])->name('events.register.batalkan');
 
     //notifikasi 
@@ -79,6 +93,27 @@ Route::middleware('auth')->group(function () {
     // Route::get('mail/notification/broadcast/{id_event}', [EmailController::class, 'broadcast'])->name('emails.notification.broadcast');
     Route::get('/broadcast/email/{id_event}', [EmailController::class, 'broadcast'])->name('broadcast.email');
     Route::post('/broadcast/email/send', [EmailController::class, 'broadcastSend'])->name('broadcast.send');
+
+
+
+    //request koordinator
+    Route::get('/request', [AnggotaController::class, 'index_request'])->name('member.request');
+    Route::post('/request-koordinator', [AnggotaController::class, 'requestKoordinator'])
+    ->name('request.koordinator')
+    ->middleware('auth');
+
+    //request koordinator - ADMIN
+    Route::get('/admin/koordinator-list', [AnggotaController::class, 'koordinator_list'])->name('koordinatorlist');
+
+    Route::get('/admin/koordinator-requests',  [AnggotaController::class, 'listRequests'])
+        ->name('admin.koordinator.requests');
+
+    Route::post('/admin/koordinator-requests/{id}/approve', [AnggotaController::class, 'approve'])
+        ->name('admin.koordinator.approve');
+
+    Route::post('/admin/koordinator-requests/{id}/reject', [AnggotaController::class, 'reject'])
+        ->name('admin.koordinator.reject');
+
 
 
     

@@ -50,7 +50,7 @@
                         <li><strong>Pelanggaran terhadap ketentuan ini</strong> dapat mengakibatkan pembatalan keikutsertaan secara mutlak.</li>
                         <li><strong>ISolutions berhak menolak akses</strong> apabila ditemukan penyalahgunaan.</li>
                         <li>Jika kartu ini ditemukan, mohon <strong>kembalikan ke ISolutions Indonesia</strong>.</li>
-                    </ul>
+                    </ul>r
                 </div>
             </div>
         </div>
@@ -117,51 +117,161 @@
                 
             </div>
 
-            <div class="metrics">
-                <div class="metric-card">
-                    <i class="fas fa-trophy"></i>
-                    <div class="value">{{'12' }}</div>
-                    <div class="label">Peringkat</div>
-                </div>
-                <div class="metric-card">
-                    <i class="fas fa-chart-line"></i>
-                    <div class="value">{{'89' }}</div>
-                    <div class="label">Poin</div>
-                </div>
-                <div class="metric-card">
-                    <i class="fas fa-coins"></i>
-                    <div class="value">{{ '42' }}</div>
-                    <div class="label">Koin</div>
-                </div>
-            </div>
+          <div class="metrics">
+<div class="metric-card">
+    <i class="fas fa-trophy"></i>
+    <div class="value">{{ $peringkat }}</div>
+    <div class="label">Peringkat</div>
+</div>
 
-                <div class="ranking-section mt-4">
-                    <h5>3 Peringkat Teratas Bulan Ini</h5>
-                    <div class="ranking-cards">
-                        <div class="ranking-card">
-                            <h6>1st Place</h6>
-                            <div>
-                                <img src="{{ asset('images') }}/no_profile.jpg" width="100px" alt="" style="border-radius: 50%">
-                            </div>
-                            <div class="place">Andi Pratama</div>
-                        </div>
-                        <div class="ranking-card">
-                            <h6>2nd Place</h6>
-                            <div>
-                                <img src="{{ asset('images') }}/no_profile.jpg" width="100px" alt="" style="border-radius: 50%">
-                            </div>
-                            <div class="place">Rina Dewi</div>
-                        </div>
-                        <div class="ranking-card">
-                            <h6>3rd Place</h6>
-                            <div>
-                                <img src="{{ asset('images') }}/no_profile.jpg" width="100px" alt="" style="border-radius: 50%">
-                            </div>
-                            <div class="place">Dimas Oktavian</div>
-                        </div>
-                    </div>
-                </div>
-        </div>
+
+    <div class="metric-card">
+        <i class="fas fa-chart-line"></i>
+        <div class="value">{{ $poin }}</div>
+        <div class="label">Poin</div>
+    </div>
+
+    <div class="metric-card">
+        <i class="fas fa-coins"></i>
+        <div class="value">{{ $koin }}</div>
+        <div class="label">Koin</div>
     </div>
 </div>
+
+<div class="ranking-section mt-4">
+    <h5>3 Peringkat Teratas Bulan Ini</h5>
+
+    <div class="ranking-cards">
+
+        @php
+            $labels = ['1st Place', '2nd Place', '3rd Place'];
+        @endphp
+
+        @for ($i = 0; $i < 3; $i++)
+            @php
+                $data = $monthlyTop3[$i] ?? null;
+
+                $name = $data->nama ?? '—';
+
+                $photo = $data && $data->foto
+                    ? asset('storage/' . $data->foto)
+                    : asset('images/no_profile.jpg');
+            @endphp
+
+            <div class="ranking-card">
+                <h6>{{ $labels[$i] }}</h6>
+
+                <div>
+                    <img src="{{ $photo }}"
+                         width="100"
+                         height="100"
+                         style="border-radius: 50%; object-fit: cover;">
+                </div>
+
+                <div class="place">{{ $name }}</div>
+
+                @if($data)
+                    <div class="text-muted" style="font-size: 13px;">
+                        {{ $data->total }} referral bulan ini
+                    </div>
+                @endif
+            </div>
+
+        @endfor
+
+    </div>
+</div>
+
+
+
+
+
+
+        </div>
+    </div>
+
+<div class="top-ref-section mt-5 pt-4"> 
+@if($akses == 'admin')
+
+    <h4 class="fw-bold text-danger text-center mb-5" style="font-size: 28px;">
+        🏆 Top 5 Referrers
+    </h4>
+
+    <div class="row justify-content-center">
+        @foreach($topReferrers->take(5) as $row)
+            @php
+                $referrer = \App\Models\Anggota::find($row->referred_by);
+            @endphp
+
+            <div class="col-md-4 mb-4">
+                <div class="ref-card shadow-lg p-4 text-center position-relative">
+
+                    <div class="rank-badge">
+                        🏆{{ $loop->iteration }}
+                    </div>
+
+                    <h5 class="fw-bold text-dark mb-2" style="font-size: 22px;">
+                        {{ $referrer ? $referrer->nama : 'Tidak ditemukan' }}
+                    </h5>
+
+                    <p class="text-secondary mb-1">
+                        <strong>Kode Referal:</strong>
+                        <span class="fw-bold text-danger ms-1">
+                            {{ str_pad($row->referred_by, 6, '0', STR_PAD_LEFT) }}
+                        </span>
+                    </p>
+
+                    <div class="invite-count mt-3 fw-bold" style="font-size: 20px;">
+                        {{ $row->total }} Member
+                    </div>
+
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+@endif
+</div>
+
+
+
+</div>
+
+
+<style>
+.ref-card {
+    background: white;
+    border-radius: 18px;
+    transition: 0.25s ease-in-out;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.ref-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.rank-badge {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: #ff0000;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.4);
+}
+
+.invite-count {
+    font-size: 1.2rem;
+    background: #eef5ff;
+    padding: 10px;
+    border-radius: 10px;
+    color: #ff0000;
+    box-shadow: inset 0 0 8px rgba(13,110,253,0.15);
+}
+</style>
+
 @endsection

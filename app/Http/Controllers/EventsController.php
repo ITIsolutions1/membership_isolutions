@@ -244,6 +244,69 @@ class EventsController extends Controller
            }            
         }
 
+
+
+        public function referralCheck($event_id)
+        {
+            return view('events.referral_check', compact('event_id'));
+        }
+
+     public function referralSubmit(Request $request, $event_id)
+{
+    $anggota = Auth::user()->anggota;
+
+    try {
+        // Jika user mengisi referral, simpan di pivot table
+        if ($request->referral_code) {
+            $anggota->eventsJoined()->syncWithoutDetaching([
+                $event_id => ['referred_by' => $request->referral_code]
+            ]);
+        } else {
+            // Jika tidak isi referral, tetap daftar event tanpa referral
+            $anggota->eventsJoined()->syncWithoutDetaching([$event_id]);
+        }
+
+        return redirect()
+            ->route('events.show', $event_id)
+            ->with('success', "Anda telah terdaftar pada event ini.");
+
+    } catch (\Exception $e) {
+
+        return redirect()
+            ->route('events.show', $event_id)
+            ->with('error', "Terjadi kesalahan saat mendaftar event.");
+    }
+}
+
+public function referralSkip($event_id)
+{
+    $anggota = Auth::user()->anggota;
+
+    try {
+        $anggota->eventsJoined()->syncWithoutDetaching([$event_id]);
+
+        return redirect()
+            ->route('events.show', $event_id)
+            ->with('success', "Anda telah terdaftar pada event ini.");
+    } catch (\Exception $e) {
+        return redirect()
+            ->route('events.show', $event_id)
+            ->with('error', "Terjadi kesalahan saat mendaftar event.");
+    }
+}
+
+public function alreadyJoined($event_id)
+{
+    return view('events.already_joined', compact('event_id'));
+}
+
+
+
+
+
+
+
+
         //===========REGISTER DARI LUAR =========
         public function register2($event_id){
             return redirect()->route('login');

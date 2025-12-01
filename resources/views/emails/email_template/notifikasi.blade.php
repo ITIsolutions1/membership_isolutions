@@ -10,13 +10,13 @@
 
         <!-- Header -->
         <div style="background-color: #1d4ed8; color: white; padding: 20px; border-top-left-radius: 8px; border-top-right-radius: 8px;">
-            <h2 style="margin: 0;">📢 Info Acara Terbaru</h2>
+            <h2 style="margin: 0;">📢 Reminder</h2>
         </div>
 
         <!-- Body -->
         <div style="padding: 20px;">
             <p><strong>Hai, {{$nama}}</strong></p>
-            <p>Kami ingin menginformasikan bahwa akan diadakan acara berikut:</p>
+            <p>Dengan ini kami mengingatkan kembali bahwa acara berikut akan dilaksanakan:</p>
 
             <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
                 <tr>

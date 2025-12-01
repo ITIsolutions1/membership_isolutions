@@ -122,9 +122,13 @@
                         </a>
                         @endif
 
-                        <div>
+                        <!-- <div>
                             <a href="{{ route('events.register', $event->id) }}" class="btn btn-outline-primary btn w-100 mt-3">Daftar Event</a>
-                        </div>
+                        </div> -->
+                        <a href="{{ route('events.referral.check', $event->id) }}" class="btn btn-outline-primary btn w-100 mt-3">
+                            Daftar Event
+                        </a>
+
 
                         @if(Auth::user()->role == 'admin')
                             <div>
@@ -148,7 +152,9 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Email</th>
-                                <th>Nomor</th>
+                                <th>Nomor Telepon</th>
+                                <th>kode Referal</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -158,6 +164,15 @@
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->nomor }}</td>
+                               <td>
+                                    @if ($item->pivot && $item->pivot->referred_by)
+                                        {{ str_pad($item->pivot->referred_by, 6, '0', STR_PAD_LEFT) }}
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+
+
                             </tr>
                             @endforeach
                         </tbody>

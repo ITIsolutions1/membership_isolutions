@@ -148,6 +148,12 @@
                         <label class="form-label" for="nomor">Nomor Telepon</label>
                         <input class="form-control" type="text" id="nomor" name="nomor">
                     </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Kode Referal</label>
+                        <input class="form-control" type="text" name="referral_code">
+                    </div>
+
             </div>
             <div class="modal-footer justify-content-between">
                 <button class="btn btn-success" type="submit">Daftar</button>

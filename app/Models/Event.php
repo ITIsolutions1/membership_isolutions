@@ -18,7 +18,9 @@ class Event extends Model
     //     return $this->belongsToMany(Anggota::class, 'anggota_events');
     // }
 
-    public function anggotaJoined(){
-         return $this->belongsToMany(Anggota::class, 'anggota_events', 'events_id', 'anggota_id');
-    }
+public function anggotaJoined(){
+     return $this->belongsToMany(Anggota::class, 'anggota_events', 'events_id', 'anggota_id')
+                 ->withPivot('referred_by'); 
+}
+
 }
