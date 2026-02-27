@@ -25,12 +25,49 @@
 
 
     <div class="container-fluid px-0">
-        <div class="profile-title text-center mt-4 mb-5">
+        <div class="profile-title text-center mt-4 mb-2">
             <p style="font-size: 30px" id="profile-title">Profile</p>
         </div>
+
+   
         <form method="POST" action="{{ route('member.profile.update') }}" class="profile-form bg-white rounded-0 shadow-none px-0 px-md-5 py-4 mx-auto" style="max-width:900px;" enctype="multipart/form-data">
             @csrf
             @method('POST')
+
+             <div class="form-group text-center">
+
+    <!-- <label class="font-weight-bold d-block mb-2">Foto Profil</label> -->
+
+    <!-- Container Foto -->
+    <div class="position-relative d-inline-block">
+
+        <!-- Foto Profil / Default -->
+        <img 
+            id="profile-photo"
+            src="{{ $anggota->foto ? asset('storage/' . $anggota->foto) : asset('images/no_profile.jpg') }}"
+            class="rounded-circle border"
+            style="width: 150px; height: 150px; object-fit: cover;"
+        >
+
+        <!-- Tombol Edit -->
+        <label for="foto-input" 
+            class="position-absolute bg-primary text-white rounded-circle p-2"
+            style="bottom: 0; right: 0; cursor: pointer;">
+            <i class="fas fa-camera"></i>
+        </label>
+
+        <!-- Input File (disembunyikan) -->
+        <input 
+            type="file" 
+            id="foto-input" 
+            name="foto"
+            class="d-none"
+            accept="image/*"
+            onchange="previewInstant(event)"
+        >
+    </div>
+
+</div>
             <div class="row g-4 mb-3">
                 <div class="col-md-6">
                     <label for="nama" class="profile-form-label">Nama Lengkap</label>
@@ -90,31 +127,8 @@
             </div>
             <hr>
 
-            <div class="form-group">
-                <label for="gambar">Foto Profil</label>
-                <input type="file" class="form-control-file" id="gambar" name="foto" accept="image/*" onchange="previewImage(event)">
+       
 
-                <div id="preview-container" class="mt-3 d-none">
-                    <p class="mb-2 font-weight-bold">Preview Foto baru:</p>
-                    <img id="preview" class="img-thumbnail rounded border" style="max-height: 250px; object-fit: cover;">
-                </div>
-
-                {{-- <div id="preview-container2" class="mt-3">
-                    @if($anggota->foto)
-                        <p class="mb-2 font-weight-bold">Foto Saat Ini:</p>
-                        <img src="{{ asset('storage/' . $anggota->foto) }}" class="img-thumbnail rounded border" style="max-height: 250px; object-fit: cover;">
-                    @else
-                        <h2>Tidak ada Foto Profil</h2>
-                    @endif
-                </div> --}}
-
-                @if($anggota->foto)
-                    <div id="preview-container2" class="mt-3">
-                        <p class="mb-2 font-weight-bold">Foto Saat Ini:</p>
-                        <img src="{{ asset('storage/' . $anggota->foto) }}" class="img-thumbnail rounded border" style="max-height: 250px; object-fit: cover;">
-                    </div>
-                @endif
-            </div>
 
             <hr>
 
@@ -191,30 +205,21 @@
 
 @push('js')
 <script>
+function previewInstant(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const img = document.getElementById('profile-photo');
+    img.src = URL.createObjectURL(file);
+}
+</script>
+
+<script>
 
     ///////////////
     //PREVIEW FOTO PROFIL
     //////////////////////////////
 
-    function previewImage(event) {
-        const input = event.target;
-        const preview = document.getElementById('preview');
-        const container = document.getElementById('preview-container');
-        const container2 = document.getElementById('preview-container2');
-
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            if (container2) {
-                container2.classList.add('d-none');
-            }            
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-                container.classList.remove('d-none');
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
 
 
 $(document).ready(function () {

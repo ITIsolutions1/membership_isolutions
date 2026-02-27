@@ -8,6 +8,59 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 @endsection
 
+
+
+<style>
+.referral-box {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px 20px;
+    margin: 25px auto;
+    max-width: 450px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border: 1px solid #f2f2f2;
+}
+
+.referral-icon {
+    font-size: 40px;
+    color: #d4a017; /* gold */
+    margin-bottom: 10px;
+}
+
+.referral-title {
+    font-weight: 700;
+    font-size: 24px;
+    color: #d4a017;
+    margin-bottom: 8px;
+}
+
+.referral-subtitle {
+    font-size: 14px;
+    color: #6c757d;
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.referral-btn {
+    background: #0069d9;
+    color: white;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0,123,255,0.3);
+}
+
+.referral-btn:hover {
+    background: #0056b3;
+    transform: translateY(-3px);
+}
+</style>
+
+
 {{-- @dd($data) --}}
 <div class="dashboard-container">
     <div class="row">
@@ -50,10 +103,28 @@
                         <li><strong>Pelanggaran terhadap ketentuan ini</strong> dapat mengakibatkan pembatalan keikutsertaan secara mutlak.</li>
                         <li><strong>ISolutions berhak menolak akses</strong> apabila ditemukan penyalahgunaan.</li>
                         <li>Jika kartu ini ditemukan, mohon <strong>kembalikan ke ISolutions Indonesia</strong>.</li>
-                    </ul>r
+                    </ul>
                 </div>
             </div>
+
+                 <div class="referral-box text-center">
+
+                    <div class="referral-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+
+                    <h3 class="referral-title">Ajak Teman & Dapatkan Koin!</h3>
+
+                    <p class="referral-subtitle">
+                        Bagikan link referral kamu dan kumpulkan lebih banyak koin setiap kali teman bergabung 🎉
+                    </p>
+
+                    <button class="referral-btn" onclick="copyReferral()">
+                        <i class="fas fa-copy"></i> Copy Referral Link
+                    </button>
+                </div>
         </div>
+   
 
 
         {{-- Kanan: Info Profil, Metrics, Ranking --}}
@@ -117,70 +188,71 @@
                 
             </div>
 
-          <div class="metrics">
-<div class="metric-card">
-    <i class="fas fa-trophy"></i>
-    <div class="value">{{ $peringkat }}</div>
-    <div class="label">Peringkat</div>
-</div>
-
-
-    <div class="metric-card">
-        <i class="fas fa-chart-line"></i>
-        <div class="value">{{ $poin }}</div>
-        <div class="label">Poin</div>
-    </div>
-
-    <div class="metric-card">
-        <i class="fas fa-coins"></i>
-        <div class="value">{{ $koin }}</div>
-        <div class="label">Koin</div>
-    </div>
-</div>
-
-<div class="ranking-section mt-4">
-    <h5>3 Peringkat Teratas Bulan Ini</h5>
-
-    <div class="ranking-cards">
-
-        @php
-            $labels = ['1st Place', '2nd Place', '3rd Place'];
-        @endphp
-
-        @for ($i = 0; $i < 3; $i++)
-            @php
-                $data = $monthlyTop3[$i] ?? null;
-
-                $name = $data->nama ?? '—';
-
-                $photo = $data && $data->foto
-                    ? asset('storage/' . $data->foto)
-                    : asset('images/no_profile.jpg');
-            @endphp
-
-            <div class="ranking-card">
-                <h6>{{ $labels[$i] }}</h6>
-
-                <div>
-                    <img src="{{ $photo }}"
-                         width="100"
-                         height="100"
-                         style="border-radius: 50%; object-fit: cover;">
-                </div>
-
-                <div class="place">{{ $name }}</div>
-
-                @if($data)
-                    <div class="text-muted" style="font-size: 13px;">
-                        {{ $data->total }} referral bulan ini
-                    </div>
-                @endif
+          <div class="metrics" style="margin-top: 35px;">
+            <div class="metric-card">
+                <i class="fas fa-trophy"></i>
+                <div class="value">{{ $peringkat }}</div>
+                <div class="label">Peringkat</div>
             </div>
 
-        @endfor
 
-    </div>
-</div>
+                <div class="metric-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="value">{{ $poin }}</div>
+                    <div class="label">Poin</div>
+                </div>
+
+                <div class="metric-card">
+                    <i class="fas fa-coins"></i>
+                    <div class="value">{{ $koin }}</div>
+                    <div class="label">Koin</div>
+                </div>
+        </div>
+
+        <div class="ranking-section" style="margin-top: 35px;">
+
+            <h5>3 Peringkat Teratas Bulan Ini</h5>
+
+            <div class="ranking-cards">
+
+                @php
+                    $labels = ['1st Place', '2nd Place', '3rd Place'];
+                @endphp
+
+                @for ($i = 0; $i < 3; $i++)
+                    @php
+                        $data = $monthlyTop3[$i] ?? null;
+
+                        $name = $data->nama ?? '—';
+
+                        $photo = $data && $data->foto
+                            ? asset('storage/' . $data->foto)
+                            : asset('images/no_profile.jpg');
+                    @endphp
+
+                    <div class="ranking-card">
+                        <h6>{{ $labels[$i] }}</h6>
+
+                        <div>
+                            <img src="{{ $photo }}"
+                                width="100"
+                                height="100"
+                                style="border-radius: 50%; object-fit: cover;">
+                        </div>
+
+                        <div class="place">{{ $name }}</div>
+
+                        <!-- @if($data)
+                            <div class="text-muted" style="font-size: 13px;">
+                                {{ $data->total }} referral bulan ini
+                            </div>
+                        @endif -->
+                    </div>
+
+                @endfor
+
+            </div>
+        </div>
 
 
 
@@ -190,7 +262,12 @@
         </div>
     </div>
 
-<div class="top-ref-section mt-5 pt-4"> 
+
+
+
+
+
+<!-- <div class="top-ref-section mt-5 pt-4"> 
 @if($akses == 'admin')
 
     <h4 class="fw-bold text-danger text-center mb-5" style="font-size: 28px;">
@@ -231,11 +308,23 @@
     </div>
 
 @endif
-</div>
+</div> -->
 
 
 
 </div>
+<script>
+function copyReferral() {
+    let referralCode = "{{ str_pad(Auth::user()->id, 6, '0', STR_PAD_LEFT) }}";
+    let url = "{{ url('/register') }}" + "?ref=" + referralCode;
+
+    navigator.clipboard.writeText(url).then(() => {
+        alert("Referral link copied!\n" + url);
+    });
+}
+</script>
+
+
 
 
 <style>

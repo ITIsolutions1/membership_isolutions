@@ -59,7 +59,7 @@
                 </div>
                 {{-- Nomor Telepon  --}}
                 <div class="mb-4 w-1/2 p-2">
-                    <label for="nomor" class="block text-md font-medium text-gray-700">Phone Number</label>
+                    <label for="nomor" class="block text-md font-medium text-gray-700">Phone Number <span style="color:red;">*</span></label>
                     <input id="nomor" name="nomor" type="text" required
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         value="{{ old('nomor') }}">
@@ -125,14 +125,16 @@
         pattern="[0-9]*" 
         inputmode="numeric"
         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm 
-               focus:ring-indigo-500 focus:border-indigo-500"
-        value="{{ old('referral_code') }}"
+            focus:ring-indigo-500 focus:border-indigo-500"
+        value="{{ $referral_code ?? old('referral_code') }}"
         placeholder="Masukkan kode referral (boleh dikosongkan)"
+        @if(isset($referral_code)) readonly @endif
     >
 
     @error('referral_code')
         <p class="text-md text-red-600 mt-1">{{ $message }}</p>
     @enderror
+
 </div>
 
 
@@ -216,17 +218,26 @@
                 Hidden input untuk submit array genre
                 <input type="hidden" name="genre" id="genre-hidden">
             </div> -->
-            <div>
-                <button type="submit"
-                    class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    Register
-                </button>
-            </div>
-        </form>
-        <a href="{{ route('login') }}"
-        class="flex justify-center mt-5 w-[250
-        px] py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        >already have an account</a>
+  <div>
+    <button type="submit"
+        class="flex justify-center mt-5 w-[1800px] py-2 px-4 
+        border border-transparent rounded-md shadow-sm 
+        text-white bg-blue-600 hover:bg-blue-700 
+        focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    >
+        Register
+    </button>
+</div>
+
+<a href="{{ route('login') }}"
+    class="flex justify-center mt-5 w-[1800px] py-2 px-4 
+    border border-transparent rounded-md shadow-sm 
+    text-white bg-red-600 hover:bg-red-700 
+    focus:outline-none focus:ring-2 focus:ring-red-500"
+>
+    Already have an account
+</a>
+        </form> 
         
     </div>
 </div>

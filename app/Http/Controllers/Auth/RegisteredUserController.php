@@ -23,11 +23,22 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
-    {
-        $domisili = Kota::pluck('nama_kota', 'id');        
-        return view('auth.register', compact('domisili'));
-    }
+    // public function create(): View
+    // {
+    //     $domisili = Kota::pluck('nama_kota', 'id');        
+    //     return view('auth.register', compact('domisili'));
+    // }
+
+    public function create(Request $request): View
+{
+    $domisili = Kota::pluck('nama_kota', 'id');
+
+    // Ambil referral dari URL, contoh: /register?ref=000025
+    $referral_code = $request->query('ref');
+
+    return view('auth.register', compact('domisili', 'referral_code'));
+}
+
     
     /**
      * Handle an incoming registration request.
