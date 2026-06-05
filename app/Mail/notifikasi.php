@@ -18,10 +18,12 @@ class notifikasi extends Mailable
      */
     public $event;
     public $nama;
-    public function __construct($event, $nama)
+    public $pesan;
+    public function __construct($event, $nama, $pesan)
         {
             $this->event = $event;
             $this->nama = $nama;
+                $this->pesan = $pesan;
         }
 
     public function build()
@@ -29,7 +31,8 @@ class notifikasi extends Mailable
             return $this->subject('Notifikasi Acara Baru')
                         ->view('emails.email_template.notifikasi')
                         ->with(['event' => $this->event,
-                                'nama' => $this->nama
+                                'nama' => $this->nama,
+                                 'pesan' => $this->pesan
                             ]);
         }
 

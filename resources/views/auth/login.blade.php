@@ -61,7 +61,7 @@
         }
 
         .login-button {
-            background-color: #dad4d4;
+            background-color: #6d0000;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             border: none;
         }

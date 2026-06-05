@@ -14,10 +14,12 @@ use function PHPUnit\Framework\returnSelf;
 class EventsController extends Controller
 {
     //
-    public function index(){
-        $events = Event::orderBy('created_at', 'desc')->paginate(10);
-        return view('events.event', compact('events'));
-    }
+ public function index()
+{
+    $events = Event::orderBy('tanggal', 'desc')->paginate(10);
+
+    return view('events.event', compact('events'));
+}
 
    public function index_admin(Request $request)
 {
@@ -107,6 +109,7 @@ class EventsController extends Controller
        }
                        
     }
+    
     public function show2($id){
         $event = Event::findOrFail($id);
         return view('events.show2', compact('event'));

@@ -66,27 +66,36 @@ class EmailController extends Controller
 
     }
 
-    public function send_notification($id_event)
-    {
+public function send_notification(Request $request, $id_event)
+{
+    try {
 
-        try{
-            $event = Event::where('id', $id_event)->first();
-            $anggota = $event->anggotaJoined;
-            // $anggota = Anggota::whereHas('peminatan', function ($query) use ($event) {
-            //     $query->where('peminatan', $event->jenis_peminatan);
-            // })->get();
-            foreach($anggota as $item){
-                Mail::to($item->email)->queue(new notifikasi($event, $item->nama));
-            }
+        $event = Event::where('id', $id_event)->first();
 
-            return back()->with('success', 'Email notifikasi berhasil dikirim.');
-        }catch(\Exception){
-            return "terjadi kesalahan";
-            return back()->with('error', 'Terjadi Kesalahan');
+        $anggota = $event->anggotaJoined;
+
+        $pesan = $request->pesan;
+
+        foreach($anggota as $item){
+
+            Mail::to($item->email)->send(
+                new notifikasi(
+                    $event,
+                    $item->nama,
+                    $pesan
+                )
+            );
+
         }
 
-    }
+        return back()->with('success', 'Email notifikasi berhasil dikirim.');
 
+    } catch(\Exception $e){
+
+        return $e->getMessage();
+
+    }
+}
 
     public function broadcast(Request $request, $id_event)
     {

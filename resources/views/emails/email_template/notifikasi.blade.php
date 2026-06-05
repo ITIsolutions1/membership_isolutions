@@ -9,7 +9,7 @@
     <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
 
         <!-- Header -->
-        <div style="background-color: #1d4ed8; color: white; padding: 20px; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+        <div style="background-color: #880000; color: white; padding: 20px; border-top-left-radius: 8px; border-top-right-radius: 8px;">
             <h2 style="margin: 0;">📢 Reminder</h2>
         </div>
 
@@ -64,6 +64,31 @@
                 </tr>
                 @endif
             </table>
+
+            @if(!empty($pesan))
+            <div style="
+                margin-top: 20px;
+                margin-bottom: 20px;
+                padding: 15px;
+                background-color: #f3f4f6;
+                border-left: 4px solid #880000;
+                border-radius: 6px;
+            ">
+                <p style="margin:0; font-weight:bold; color:#880000;">
+                    Pesan Tambahan
+                </p>
+
+                <p style="
+                    margin-top:10px;
+                    margin-bottom:0;
+                    line-height:1.6;
+                    color:#374151;
+                ">
+                    {!! nl2br(e($pesan)) !!}
+                </p>
+            </div>
+            @endif
+            
 
             <p style="margin-top: 20px;">📲 Untuk informasi lebih lanjut dan pembaruan terkini, silakan pantau platform kami www.member.isolutions.co.id </p>
 

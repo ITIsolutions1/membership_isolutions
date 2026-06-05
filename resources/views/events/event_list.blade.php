@@ -136,6 +136,49 @@
             @endif
         </div>
     </div>
+    <div class="modal fade" id="notifModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form id="notifForm" method="GET">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Kirim Notifikasi
+                    </h5>
+                </div>
+
+                <div class="modal-body">
+
+                    <label>Pesan Tambahan</label>
+
+                    <textarea
+                        name="pesan"
+                        class="form-control"
+                        rows="5"
+                        placeholder="Tambahkan pesan..."
+                    ></textarea>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal">
+                        Batal
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Kirim Email
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
 
     <!-- Modal Loading -->
     <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
@@ -152,15 +195,14 @@
 @push('js')
 <script>
     $('#kirim_notifikasi').on('click', function (event) {
-        event.preventDefault(); // cegah link langsung berjalan
 
-        const confirmResult = confirm('Lanjut Mengirimkan Notifikasi ?');
+        event.preventDefault();
 
-        if (confirmResult) {
-            $('#loadingModal').modal('show'); // tampilkan loading
-            window.location.href = $(this).attr('href'); // lanjutkan ke URL
-        }
-        // Jika tidak, tidak terjadi apa-apa
+        let url = $(this).attr('href');
+
+        $('#notifForm').attr('action', url);
+
+        $('#notifModal').modal('show');
     });
 </script>
 

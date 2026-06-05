@@ -34,7 +34,16 @@
                 <div class="card h-100 shadow-sm border-0">
                     @if($event->gambar)
                         {{-- <img src="{{ asset('storage/'.$event->gambar) }}" class="card-img-top" alt="{{ $event->nama }}" style="height:180px;object-fit:cover;"> --}}
-                        <img src="{{ asset('storage/' . $event->gambar) }}" class="card-img-top" alt="{{ $event->nama }}" style="height:500px;object-fit:cover;">
+                     <img src="{{ asset('storage/' . $event->gambar) }}" 
+     class="card-img-top bg-white p-2"
+     alt="{{ $event->nama }}" 
+     style="
+        height:500px;
+        width:100%;
+        object-fit:contain;
+        border-radius:15px;
+        border:1px solid #eee;
+     ">
                     @else
                         <img src="{{ asset('images') }}/no_image.png" class="card-img-top" alt="event">
                     @endif
@@ -47,10 +56,10 @@
                         <div class="mt-auto">
                             <span class="badge bg-info text-dark mb-2">{{ $event->jenis_peminatan }}</span>
                             <a href="{{ route('events.show', $event->id) }}" class="btn btn-outline-primary btn-sm w-100 mb-2">Detail Event</a>
-                            @if($event->link)
+                            {{-- @if($event->link)
                                 <a href="{{ $event->link }}" class="btn btn-outline-primary btn-sm w-100 mb-2">Link Event</a>                            
-                            @endif
-                            <a href="{{ route('events.register', $event->id) }}" class="btn btn-outline-primary btn-sm w-100 mb-2">Daftar Event</a>
+                            @endif --}}
+                            {{-- <a href="{{ route('events.register', $event->id) }}" class="btn btn-outline-primary btn-sm w-100 mb-2">Daftar Event</a> --}}
                         </div>
                     </div>
                     <div class="card-footer bg-white border-0 small text-muted">

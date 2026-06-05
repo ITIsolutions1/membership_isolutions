@@ -26,11 +26,21 @@
             @if(!empty($event->gambar) && $event->gambar != '')
                 <div class="col-md-5">
                     <img src="{{ asset('storage/' . $event->gambar) }}" class="card-img rounded-left" alt="{{ $event->nama }}" style="object-fit: cover;">
+                  <div class="mt-3">
+        <a href="{{ route('events.referral.check', $event->id) }}"
+           class="btn btn-danger btn-lg w-100 daftar-btn">
+            <i class="fas fa-ticket-alt me-2"></i>
+            Daftar Event
+        </a>
+    </div>
                 </div>
             @else
                 <div class="col-md-5">
                     <img src="{{ asset('images/no_image.png') }}" class="card-img h-100 rounded-left" alt="Default Event" style="object-fit: cover;">
+
+                    
                 </div>
+                
             @endif
 
             <!-- Konten -->
@@ -101,7 +111,10 @@
                                     <td class="align-top text-muted"><i class="fas fa-file"></i></td>
                                     <td class="align-top text-muted">Jenis Acara</td>
                                     <td class="align-top text-muted">:</td>
-                                    <td class="align-top"><strong>{{ $event->jenis_peminatan }}</strong></td>
+                                    {{-- <td class="align-top"><strong>{{ $event->jenis_peminatan }}</strong></td> --}}
+                                    <td class="align-top">
+                                        <strong>{{ ucwords($event->jenis_peminatan) }}</strong>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
